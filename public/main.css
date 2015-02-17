@@ -125,3 +125,16 @@ a{
   -webkit-animation: hammer-rotate 1s;
   animation: hammer-rotate 1s;
 }
+
+footer a{
+  color: #DDD;
+}
+
+footer{
+  position: absolute;
+  bottom: 20px;
+  font-size: 20px;
+  text-align: center;
+  width: 100%;
+  color: #DDD;
+}

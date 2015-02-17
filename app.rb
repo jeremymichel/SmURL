@@ -10,7 +10,7 @@ class Url
    property :short, String
 end
 
-DataMapper.auto_upgrade!
+DataMapper.auto_migrate!
 
 helpers do
   def shorten_url
