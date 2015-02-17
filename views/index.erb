@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/main.css" media="projection,screen" charset="utf-8">
+    <title>SmURL - Smashing URLs</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <h1>SmURL</h1>
+          <small>Smashing your URLs</small>
+        </div>
+        <% if @error %>
+          <div class="error">
+            <%= @error %>
+          </div>
+        <% end %>
+        <form action="/" method="post">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-100 -100 200 200">
+            <polygon style="stroke:none; fill:#FFFFFF; fill-rule:evenodd;" transform="translate(-20,15) rotate(45,0,0)"
+                points="-15,80 -15,-40 -80,-40 -40,-80 70,-80 70,-40 15,-40 15,80" />
+          </svg>
+          <input type="url" required name="url" placeholder="Your Looong URL">
+          <button type="submit">Smash</button>
+        </form>
+        <% if @shortened %>
+          <div class="result">
+            Your smashed URL is <a href="<%= "#{request.base_url}/#{@shortened}" %>"><%= "#{request.base_url}/#{@shortened}" %></a>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $('input').blur(function(){
+          $('svg').attr('class', 'active');
+        });
+        $('input').focus(function(){
+          $('svg').attr('class', '');
+        });
+        $('button').on('mouseover',function(){
+          $('svg').attr('class', 'active');
+        });
+        $('button').on('mouseleave',function(){
+          $('svg').attr('class', '');
+        });
+      });
+    </script>
+  </body>
+</html>
