@@ -4,5 +4,5 @@ gem 'sinatra'
 gem 'data_mapper'
 
 group :production do
-  # gem 'dm-postgres-adapter'
+  gem 'dm-postgres-adapter'
 end
