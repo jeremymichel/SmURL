@@ -3,6 +3,6 @@ development:
   database: db/ardev.sqlite3
   encoding: unicode
 production:
-  adapter: postgres
+  adapter: postgresql
   database: <%= ENV['DATABASE_URL'] %>
   encoding: unicode
