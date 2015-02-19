@@ -1,16 +1,8 @@
 require 'sinatra'
-require 'data_mapper'
+require "sinatra/activerecord"
 
-DataMapper.setup :default, ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/dev.db"
-
-class Url
-  include DataMapper::Resource
-   property :id, Serial
-   property :url, String
-   property :short, String
+class Url < ActiveRecord::Base
 end
-
-DataMapper.auto_migrate!
 
 helpers do
   def shorten_url
@@ -24,16 +16,20 @@ end
 
 post '/' do
   unless (params[:url] =~ URI.regexp).nil?
+    puts params[:url]
     @shortened = shorten_url
-    if @url = Url.create(url: params[:url], short: @shortened)
+    @url = Url.new(long_url: params[:url], token: @shortened)
+    if @url.save
+      puts @url.inspect
       erb :index
     end
   end
 end
 
 get '/:short/?' do
-  if long_url = Url.first(short: params[:short])
-    redirect long_url.url
+  puts Url.find_by_token(params[:short])
+  if url = Url.find_by_token(params[:short])
+    redirect url.long_url
   else
     @error = "No URL found with the token : #{params[:short]}"
     erb :index

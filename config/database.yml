@@ -1,0 +1,8 @@
+development:
+  adapter: sqlite3
+  database: db/ardev.sqlite3
+  encoding: unicode
+production:
+  adapter: postgres
+  database: <%= ENV['DATABASE_URL'] %>
+  encoding: unicode
